@@ -52,7 +52,6 @@ key = hasher(PASSWORD)
 SOCKET_LIST = []
 RECV_BUFFER = 4096
 
-
 def chat_server():
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -91,9 +90,11 @@ def chat_server():
                         if sock in SOCKET_LIST:
                             SOCKET_LIST.remove(sock)
 
+                        print "[info] user (%s, %s) disconnected\n" % addr
                         broadcast(server_socket, sock,encrypt(key,"[info] user (%s, %s) is offline\n" % addr))
 
                 except:
+                    print "[info] user (%s, %s) disconnected\n" % addr
                     broadcast(server_socket, sock, "[info] user (%s, %s) is offline\n" % addr)
                     continue
 
